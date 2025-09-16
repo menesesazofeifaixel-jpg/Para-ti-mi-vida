@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Página Romántica 💖</title>
+<style>
+body {
+  margin: 0;
+  font-family: "Times New Roman", serif;
+  font-size: 12px;
+  background: #a8e6cf;
+  color: #fff;
+  text-align: center;
+  overflow: auto;
+  transition: background 5s ease;
+}
+
+/* Textos y títulos */
+h1 { margin-top: 50px; font-size: 2.5em; color: #fff; text-shadow: 2px 2px 3px #000; }
+.textoAnimado { font-size: 12px; color: #fff; text-shadow: 1px 1px 2px #000; margin: 20px; min-height: 80px; }
+#mensajePagina { font-size: 12px; color: #fff; text-shadow: 1px 1px 2px #000; min-height: 120px; margin: 15px; }
+
+/* Botones */
+.botonRomantico, .botonMusica {
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  transition: 0.3s;
+  margin: 10px;
+}
+.botonRomantico:hover, .botonMusica:hover {
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* Fotos */
+.fotoContainer { position: relative; display: inline-block; margin: 10px; }
+.fotoContainer img { width: 200px; height: 200px; object-fit: cover; border-radius: 15px; cursor: pointer; transition: transform 0.3s; }
+.fotoContainer img:hover { transform: scale(1.05); }
+.mensajeFoto {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff; font-size: 12px; text-shadow: 1px 1px 2px #000;
+  opacity: 0; transition: opacity 0.5s; pointer-events: none;
+}
+.destello {
+  position: absolute; width: 50px; height: 50px;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0; pointer-events: none;
+  animation: destelloAnim 0.6s forwards;
+}
+@keyframes destelloAnim { 0% { transform: translate(-50%, -50%) scale(0); opacity:1; } 100% { transform: translate(-50%, -50%) scale(2); opacity:0; } }
+
+/* Corazones flotando */
+.corazon { position: absolute; bottom: -20px; color: #ff5f6d; font-size: 2em; animation: flotar 6s linear infinite; opacity:0.7; }
+@keyframes flotar { 0% { transform: translateY(0) scale(1); opacity:0.8;} 50%{transform:translateY(-300px) scale(1.2); opacity:0.5;}100%{transform:translateY(-600px) scale(0.8);opacity:0;}}
+
+/* Contenedor de video */
+#contenedorVideo, #contenedorMiVideo { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#000; padding:10px; border-radius:10px; z-index:1000; }
+#contenedorVideo video, #contenedorMiVideo video { max-width:90vw; height:auto; }
+
+</style>
+</head>
+<body>
+
+<h1>💖 Hola mi Amor 💖</h1>
+<p class="textoAnimado" id="texto"></p>
+
+<!-- Botones principales -->
+<button class="botonRomantico" onclick="mostrarMensaje()">Haz clic aquí</button>
+<button class="botonRomantico" onclick="recuerdoEspecial()">Recuerdo Especial 💌</button>
+<button class="botonRomantico" onclick="mostrarVideo()">Mira este video 🎬</button>
+<button class="botonRomantico" onclick="mensajeLargo()">Mi mensaje para ti 💖</button>
+<button class="botonRomantico" onclick="window.open('https://www.canva.com/design/DAGzLbOQn8w/f8e-uOe3GppQhCicemQ-3w/edit?utm_content=DAGzLbOQn8w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton','_blank')">
+  Mira tu carta mi amor, te amo ❤
+</button>
+<button class="botonRomantico" onclick="mostrarMiVideo()">Video hecho por mi para ti 🎥</button>
+<button class="botonRomantico" onclick="proximoAniversario()">Próximamente 1 año y 3 meses, te amo 💓</button>
+
+<p id="mensajePagina"></p>
+
+<h2>Mis Fotos 💖</h2>
+<div class="galeria">
+  <div class="fotoContainer">
+    <img src="foto1.jpg" onclick="interactuarFoto(this, 'Me encanta esta foto 💖')">
+    <div class="mensajeFoto"></div>
+  </div>
+  <div class="fotoContainer">
+    <img src="foto2.jpg" onclick="interactuarFoto(this, 'Eres lo mejor que tengo 💖')">
+    <div class="mensajeFoto"></div>
+  </div>
+  <div class="fotoContainer">
+    <img src="foto3.jpg" onclick="interactuarFoto(this, 'Nuestra primera foto 💖')">
+    <div class="mensajeFoto"></div>
+  </div>
+</div>
+
+<!-- Contenedores de video -->
+<div id="contenedorVideo">
+  <video id="miVideo" controls>
+    <source src="miVideo.mp4" type="video/mp4">
+    Tu navegador no soporta video.
+  </video>
+  <br>
+  <button onclick="cerrarVideo()" style="margin-top:5px; padding:5px 10px;">Cerrar</button>
+</div>
+
+<div id="contenedorMiVideo">
+  <video id="miVideoPersonal" controls>
+    <source src="miVideoPersonal.mp4" type="video/mp4">
+    Tu navegador no soporta video.
+  </video>
+  <br>
+  <button onclick="cerrarMiVideo()" style="margin-top:5px; padding:5px 10px;">Cerrar</button>
+</div>
+
+<!-- Música -->
+<audio id="miMusica" loop>
+  <source src="exist_for_love.mp3" type="audio/mpeg">
+  Tu navegador no soporta el audio.
+</audio>
+<button class="botonMusica" onclick="toggleMusica()">🎵 Reproducir/Pausar Música</button>
+
+<script>
+// Texto animado
+const texto = "HOLAAAA MI AMOR, te amo con toda mi alma, te hice esto un poquito lindo para ti, quiero recordarte que eres todo lo que siempre soñé, te amo desde la primera vez que te vi, mi amor por ti se hace más grande cada día, me haces sentir mariposas, me haces sentir viva y feliz, deseo que todo siempre se te cumpla, quiero tener un futuro contigo ya que eres el amor de mi vida, se que te amaré por siempre, te adoro ❤";
+const textoElemento = document.getElementById("texto");
+let i = 0;
+function escribirTexto(){ if(i<texto.length){ textoElemento.innerHTML += texto.charAt(i); i++; setTimeout(escribirTexto,50); } }
+escribirTexto();
+
+// Mensajes de botones
+function mostrarMensaje(){ document.getElementById("mensajePagina").innerHTML="Te amo 💖, eres lo mejor de mi vida ✨"; }
+function recuerdoEspecial(){ document.getElementById("mensajePagina").innerHTML="El 27 de junio del 2024 fue el mejor año de mi vida, te agradezco por todo el amor que me has brindado, ya casi dos años, y te sigo amando como al principio ❤"; }
+function mensajeLargo(){
+  document.getElementById("mensajePagina").innerHTML=`Primero decirte que gracias, que gracias por todas las veces que has decidido seguir a pesar de todas las cosas que nos pasan, es increíble como tienes tanto amor, hace 2 años, en 2023 ño tenía ni idea que una persona que no era de tu sangre te podía querer tanto, pero cuando te conocí comprendí que este amor es diferente, es más real, es más bello saber que esa persona podría estar pensando lo mismo en ese momento igual que tú, o se rían de cosas sin sentido y que solo ellos se entiendan, es decir así me siento contigo, siento química, siento lo que jamás pensé que sentiría, me traes paz en medio de una tormenta, me traes ánimos en medio de tanto estrés, sabes mis caras, me conoces demasiado bien y yo a ti, me encanta que cuando te digo que no quiero que me dejes sola sabes que si, me encanta tu forma de ver y pensar, tu madurez, tus ganas de que si algo sale mal seguir con ello.<br><br>
+Me encanta que sepas lo que me gusta y lo que ño, me encanta la confianza que hemos construido, hace dos años ño pensaba ni contarte ni que te iba a conocer, nos conocimos de la mejor manera, me amaste y te amé, nos amamos y es algo simplemente perfecto, veo videos de parejas y ño quiero que nada sea como en los videos, y es justo lo que tengo contigo, somos diferentes, estos días siento que te he entendido mejor de lo que Ixel del pasado te entendería, me encanta que me cuentes cosas y que cuentes conmigo, siempre siempre voy a estar para ti como un hombro cuando ocupas recostarte, tus problemas son mis problemas gracias porque cuando yo siento cosas tú las has sentido como tuyas, gracias por ser mi mano derecha y mi fuerte 💗, te amo mi vida, te adoro con mi alma 😍, eres el mejor novio del universo, eres todo lo que alguna vez quise y me llegaste tu, con esos ojos y sonrisa perfecta…<br><br>ATT: Ixel 💕`;
+}
+
+// Fotos: mensaje + destello + corazón
+function interactuarFoto(img,mensaje){
+  const mensajeDiv=img.parentElement.querySelector('.mensajeFoto');
+  mensajeDiv.innerHTML=mensaje;
+  mensajeDiv.style.opacity=1;
+  setTimeout(()=>mensajeDiv.style.opacity=0,2000);
+
+  const destello=document.createElement('div'); destello.classList.add('destello');
+  img.parentElement.appendChild(destello);
+  setTimeout(()=>destello.remove(),600);
+
+  crearCorazon();
+}
+
+// Corazones flotando 💘
+function crearCorazon(){
+  const corazon=document.createElement("div"); corazon.classList.add("corazon"); corazon.innerHTML="💘";
+  corazon.style.left=Math.random()*window.innerWidth+"px";
+  corazon.style.animationDuration=(4+Math.random()*4)+"s";
+  document.body.appendChild(corazon);
+  setTimeout(()=>{corazon.remove();},6000);
+}
+setInterval(crearCorazon,500);
+
+// Música
+const musica=document.getElementById("miMusica");
+function toggleMusica(){ if(musica.paused) musica.play(); else musica.pause(); }
+
+// Video normal
+function mostrarVideo(){ document.getElementById('contenedorVideo').style.display='block'; }
+function cerrarVideo(){ const video=document.getElementById('miVideo'); video.pause(); document.getElementById('contenedorVideo').style.display='none'; }
+
+// Video personal
+function mostrarMiVideo(){ document.getElementById('contenedorMiVideo').style.display='block'; }
+function cerrarMiVideo(){ const video=document.getElementById('miVideoPersonal'); video.pause(); document.getElementById('contenedorMiVideo').style.display='none'; }
+
+// Botón aniversario
+function proximoAniversario() {
+  document.getElementById("mensajePagina").innerHTML = `
+    Espera el 27 de septiembre porque habrá un regalo para ti 💖.<br>
+    Instrucciones:<br>
+    1️⃣ Mantén tu corazón abierto.<br>
+    2️⃣ Ven con muchas ganas de sonreír.<br>
+    3️⃣ Disfruta cada momento que hemos construido juntos 💕.
+  `;
+}
+
+// Cambio de color de fondo suave
+const colores=["#a8e6cf","#ffd1dc","#cfcfff","#b3e5fc"];
+let colorIndex=0;
+setInterval(()=>{ colorIndex=(colorIndex+1)%colores.length; document.body.style.background=colores[colorIndex]; },20000);
+
+</script>
+</body>
+</html>
